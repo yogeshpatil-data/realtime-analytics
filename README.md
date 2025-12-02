@@ -5,14 +5,8 @@ Design and implement a real-time data pipeline that ingests high-volume user cli
 
 
 # Pipeline
-Event Generator → Kafka → Spark Structured Streaming
-                          ↓
-                       Raw Storage (S3 / ADLS)
-                          ↓
-                    Curated Tables (Snowflake)
-                          ↓
-                       BI / Queries
-
+Event Generator → Kafka → Spark Structured Streaming → Raw Storage (S3) → Curated Tables (Snowflake) → BI / Queries
+                      
 # Event Schema
 {
   "event_id": "uuid",
