@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  ingestion:
+    image: realtime_ingestion:latest
+    container_name: ingestion_service
+    restart: unless-stopped
+    networks:
+      - realtime-net
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+      KAFKA_TOPIC: "raw_wikimedia_events"
+
+  spark-runner:
+    image: realtime_spark_runner:latest
+    container_name: spark_stream_service
+    restart: unless-stopped
+    networks:
+      - realtime-net
+    volumes:
+      - ../:/workspace/project
+      - /tmp/spark-checkpoints:/tmp/spark-checkpoints
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+      KAFKA_TOPIC: "raw_wikimedia_events"
+
+networks:
+  realtime-net:
+    external: true

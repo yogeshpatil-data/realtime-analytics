@@ -1,0 +1,21 @@
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# ✅ FIX IS HERE
+# Source path is ingestion/wikimedia_to_kafka.py
+COPY ingestion/wikimedia_to_kafka.py /app/wikimedia_to_kafka.py
+
+ENV KAFKA_BOOTSTRAP_SERVERS=kafka:9092 \
+    KAFKA_TOPIC=raw_wikimedia_events
+
+CMD ["python", "/app/wikimedia_to_kafka.py"]
