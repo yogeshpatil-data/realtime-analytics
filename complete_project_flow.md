@@ -1,3 +1,11 @@
+
+
+
+<img width="755" height="535" alt="Project_Diagram" src="https://github.com/user-attachments/assets/e59c6b02-c36c-42f8-8cb8-590af52c82a5" />
+
+
+
+
 # Real-Time Analytics Pipeline  
 ## Apache Kafka + Spark Structured Streaming (Dockerized)
 
