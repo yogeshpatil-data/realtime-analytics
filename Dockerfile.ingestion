@@ -11,8 +11,6 @@ WORKDIR /app
 COPY requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# ✅ FIX IS HERE
-# Source path is ingestion/wikimedia_to_kafka.py
 COPY ingestion/wikimedia_to_kafka.py /app/wikimedia_to_kafka.py
 
 ENV KAFKA_BOOTSTRAP_SERVERS=kafka:9092 \
